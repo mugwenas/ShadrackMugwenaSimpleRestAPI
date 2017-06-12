@@ -1,0 +1,42 @@
+Global Kinetic Assessment Solution
+==================================
+
+REST API design and implementation with RESTeasy and Spring
+==========================================================
+
+The application uses a multi-layered architecture, based on the “Law of Demeter (LoD) or principle of least knowledge”
+
+> the first layer is the REST support implemented with RESTeasy, has the role of a facade and delegates the logic to the business layer.
+> the business layer is where the logic happens.  
+> the data access layer is where the communcation with the pesistence storage takes place. I used in-memory database "HyperSQL" running in oracle mode.
+  Spring embbeded database was used to create HSQL in-memory database.
+  
+REST Client side implemented with JSP and jQuery framework.
+
+Running the project.
+===================
+
+The project was developed using Eclipse IDE. I included all the jars required in the lib folder (could have used ant/maven but had problems configuring build).
+Apache Tomcat v77.0.69 was used as web server and this was configured to run inside inside Eclipse. Could have configured ant build to deploy war file into Tomcat given time but
+running project under Eclipse yield desired results.  
+
+After staring Tomcat under Eclipse the url for accessing home page: http://localhost:8080/ShadrackMugwena/
+
+The screen similar to below will be presented (in html).
+
+===User Management====
+=					 =
+===Add New User=======
+===User Login=========
+
+From the screen above you ready to go.
+
+Given more time.
+===============
+
+> The exception mapper fro REST API could have been handled better.
+> Token refresh could have done better
+> css style sheet could have been applied.
+> Filter could have been configured to only apply to specific endpoints (via spring FilterChainProxy patterns).
+> properly handing of session expiring.
+

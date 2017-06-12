@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>shadrackmugwena</display-name>
+  
+  <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>
+            /WEB-INF/spring-config.xml
+     </param-value>
+  </context-param>
+ 
+   
+  <!-- Spring Security -->
+   <filter>
+    	<filter-name>filterChainProxy</filter-name>
+    	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+  <filter-mapping>
+    	<filter-name>filterChainProxy</filter-name>
+    	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+     
+	<!-- RESTEasy configuration -->
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+	</listener>
+
+	<!-- RESTEasy <-> Spring connector (RESTEasy can access Spring beans) -->
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- RESTEasy HTTP Request processor -->
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/resources</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>resteasyservlet</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>resteasyservlet</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>  
+	
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

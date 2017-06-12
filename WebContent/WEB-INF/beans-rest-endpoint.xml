@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        				   	http://www.springframework.org/schema/beans/spring-beans.xsd
+        				   	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        				    http://www.springframework.org/schema/tx 
+     						http://www.springframework.org/schema/tx/spring-tx.xsd
+     						http://www.springframework.org/schema/aop 
+     						http://www.springframework.org/schema/aop/spring-aop.xsd
+     						http://www.springframework.org/schema/security
+        				   http://www.springframework.org/schema/security/spring-security.xsd">
+     						
+	<bean id="userEndpoint" class="com.za.shadrack.endpoint.UserEndpoint">
+       	<constructor-arg ref="userService" />
+    </bean>     
+    
+    <bean id="authenticationFilter" class="com.za.shadrack.filter.AuthenticationFilter">
+		<constructor-arg ref="userBO" />
+	</bean>						
+     			
+    <bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map request-matcher="regex">
+		 	<security:filter-chain pattern="\A/resources/.*\Z" filters=" authenticationFilter " />
+		</security:filter-chain-map>
+	</bean> 						
+     						
+</beans>     						
